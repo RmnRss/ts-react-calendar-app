@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "./logo.svg";
+import { Header } from "./components/Header";
 
 const Container = styled.header`
   display: flex;
@@ -22,21 +22,10 @@ const Link = styled.a`
   color: ${(props) => props.theme.secondary};
 `;
 
-const Logo = styled.img`
-  height: 40vmin;
-  pointer-events: none;
-
-  @media (prefers-reduced-motion: no-preference) {
-    & {
-      animation: spin infinite 20s linear;
-    }
-  }
-`;
-
 function App() {
   return (
     <Container>
-      <Logo src={logo} alt="logo" />
+      <Header />
       <Text>
         Edit <code>src/App.tsx</code> and save to reload.
       </Text>
