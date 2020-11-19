@@ -1,4 +1,4 @@
-import { isSameDay } from "date-fns";
+import { isSameDay, isToday } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import IEvent from "../types/IEvent";
@@ -99,7 +99,9 @@ export const Calendar: React.FC<Props> = ({ activeMonth, events }) => {
           },
           []);
 
-          return <Day date={day} events={eventsOfTheDay} />;
+          return (
+            <Day date={day} events={eventsOfTheDay} isToday={isToday(day)} />
+          );
         })}
       </DaysGrid>
     </Container>
