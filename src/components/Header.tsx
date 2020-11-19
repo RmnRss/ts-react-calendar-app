@@ -1,9 +1,11 @@
+import { format } from "date-fns";
 import React from "react";
 import styled from "styled-components";
 import bongo from "../assets/bongo.jpg";
 import arrow from "../assets/icons/arrow-next.svg";
 import doubleArrow from "../assets/icons/double-arrow-next.svg";
 import logo from "../assets/logo.svg";
+import { useMonth } from "../providers/MonthProvider";
 import { Button } from "./Button";
 
 const Container = styled.header`
@@ -69,21 +71,49 @@ const ProfilePicture = styled.img`
 interface Props {}
 
 export const Header: React.FC<Props> = () => {
+  const {
+    month,
+    nextYear,
+    nextMonth,
+    previousYear,
+    previousMonth,
+  } = useMonth();
+
   return (
     <Container id={"header"}>
       <Logo src={logo} alt="logo" />
       <DatePicker>
-        <Button color={"greyDark"}>
+        <Button
+          onClick={() => {
+            previousYear();
+          }}
+          color={"greyDark"}
+        >
           <Backwards src={doubleArrow} />
         </Button>
-        <Button color={"darkLight"}>
+        <Button
+          onClick={() => {
+            previousMonth();
+          }}
+          color={"darkLight"}
+        >
           <Backwards src={arrow} />
         </Button>
-        <SelectedMonth>Septembre 2020</SelectedMonth>
-        <Button color={"darkLight"}>
+        <SelectedMonth>{format(month, "MMMM yyyy")}</SelectedMonth>
+        <Button
+          onClick={() => {
+            nextMonth();
+          }}
+          color={"darkLight"}
+        >
           <Icon src={arrow} />
         </Button>
-        <Button color={"greyDark"}>
+        <Button
+          onClick={() => {
+            nextYear();
+          }}
+          color={"greyDark"}
+        >
           <Icon src={doubleArrow} />
         </Button>
       </DatePicker>
