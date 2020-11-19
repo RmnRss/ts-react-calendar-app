@@ -8,6 +8,7 @@ import { Button } from "./Button";
 
 const Container = styled.header`
   position: fixed;
+  z-index: 999;
   top: 0;
   left: 0;
 
@@ -69,7 +70,7 @@ interface Props {}
 
 export const Header: React.FC<Props> = () => {
   return (
-    <Container>
+    <Container id={"header"}>
       <Logo src={logo} alt="logo" />
       <DatePicker>
         <Button color={"greyDark"}>
