@@ -1,14 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-export interface IEvent {
-  id?: number;
-  dateTimeStart: Date;
-  dateTimeEnd: Date;
-  title: string;
-  description: string;
-}
-
 const EventCard = styled.div`
   padding: 0.25rem;
 
