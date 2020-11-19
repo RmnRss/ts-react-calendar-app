@@ -40,8 +40,15 @@ interface Props {
   className?: string;
   children: React.ReactNode;
   color: string;
+  onClick?:
+    | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
+    | undefined;
 }
 
-export const Button: React.FC<Props> = ({ children, color }) => {
-  return <ButtonContainer color={color}>{children}</ButtonContainer>;
+export const Button: React.FC<Props> = ({ children, color, onClick }) => {
+  return (
+    <ButtonContainer onClick={onClick} color={color}>
+      {children}
+    </ButtonContainer>
+  );
 };
