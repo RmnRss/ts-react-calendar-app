@@ -1,41 +1,44 @@
 import React from "react";
 import styled from "styled-components";
+import { Calendar } from "./components/Calendar";
+import { IEvent } from "./components/Event";
 import { Header } from "./components/Header";
 
 const Container = styled.header`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
   min-height: 100vh;
-
-  text-align: center;
-  font-size: calc(10px + 2vmin);
 `;
 
-const Text = styled.p`
-  color: ${(props) => props.theme.primary};
-`;
+function createFakeDays(): Array<Date> {
+  const days: Array<Date> = [];
 
-const Link = styled.a`
-  color: ${(props) => props.theme.secondary};
-`;
+  for (let i: number = 0; i < 30; i++) {
+    days.push(new Date());
+  }
+
+  return days;
+}
+
+function createFakeEvents(): Array<IEvent> {
+  const ev: Array<IEvent> = [];
+
+  for (let i: number = 0; i < 2; i++) {
+    ev.push({
+      id: i,
+      dateTimeStart: new Date(2020, 10, 19, 14, 2, 0, 0),
+      dateTimeEnd: new Date(2020, 10, 19, 15, 2, 0, 0),
+      title: "event",
+      description: "this is an event",
+    });
+  }
+
+  return ev;
+}
 
 function App() {
   return (
     <Container>
       <Header />
-      <Text>
-        Edit <code>src/App.tsx</code> and save to reload.
-      </Text>
-      <Link
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </Link>
+      <Calendar activeMonth={createFakeDays()} events={createFakeEvents()} />
     </Container>
   );
 }
