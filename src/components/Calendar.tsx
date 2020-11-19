@@ -1,8 +1,8 @@
 import { isSameDay } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import IEvent from "../types/IEvent";
 import { Day } from "./Day";
-import { IEvent } from "./Event";
 
 const Container = styled.div`
   padding: 5rem 2rem;

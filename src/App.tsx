@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Calendar } from "./components/Calendar";
-import { IEvent } from "./components/Event";
 import { Header } from "./components/Header";
+import IEvent from "./types/IEvent";
 
 const Container = styled.header`
   min-height: 100vh;
