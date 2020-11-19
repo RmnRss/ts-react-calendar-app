@@ -1,4 +1,4 @@
-import { isSameDay, isToday } from "date-fns";
+import { isSameDay, isSameMonth, isToday } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import IEvent from "../types/IEvent";
@@ -40,7 +40,7 @@ interface DaysGridProps {
 }
 
 const DaysGrid = styled(Grid)<DaysGridProps>`
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
 
   // 100 vh - elements size on top - 2*5rem padding
   height: calc(100vh - ${(props) => props.offsetTop}px - 10rem);
@@ -100,7 +100,12 @@ export const Calendar: React.FC<Props> = ({ activeMonth, events }) => {
           []);
 
           return (
-            <Day date={day} events={eventsOfTheDay} isToday={isToday(day)} />
+            <Day
+              date={day}
+              events={eventsOfTheDay}
+              isToday={isToday(day)}
+              ofCurrentMonth={isSameMonth(day, new Date("May 2021"))}
+            />
           );
         })}
       </DaysGrid>
