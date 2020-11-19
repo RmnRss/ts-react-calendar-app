@@ -5,6 +5,7 @@ import { Event } from "./Event";
 
 interface ContainerProps {
   isToday: boolean;
+  ofCurrentMonth: boolean;
 }
 
 const Container = styled.div<ContainerProps>`
@@ -25,6 +26,8 @@ const Container = styled.div<ContainerProps>`
   border-radius: ${(props) => props.theme.radius};
 
   color: ${(props) => props.theme.light};
+
+  opacity: ${(props) => (props.ofCurrentMonth ? "1" : "0.5")};
 
   &:hover {
     cursor: pointer;
@@ -47,11 +50,17 @@ interface Props {
   date: Date;
   events?: Array<IEvent>;
   isToday: boolean;
+  ofCurrentMonth: boolean;
 }
 
-export const Day: React.FC<Props> = ({ date, events = [], isToday }) => {
+export const Day: React.FC<Props> = ({
+  date,
+  events = [],
+  isToday,
+  ofCurrentMonth,
+}) => {
   return (
-    <Container isToday={isToday}>
+    <Container isToday={isToday} ofCurrentMonth={ofCurrentMonth}>
       <p>{date.getDate()}</p>
       <EventsHolder>
         {events?.map((e) => (
