@@ -3,7 +3,12 @@ import styled from "styled-components";
 import IEvent from "../types/IEvent";
 import { Event } from "./Event";
 
-const Container = styled.div`
+interface ContainerProps {
+  isToday: boolean;
+  ofCurrentMonth: boolean;
+}
+
+const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
 
@@ -16,10 +21,13 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  background-color: ${(props) => props.theme.greyDark};
+  background-color: ${(props) =>
+    props.isToday ? props.theme.secondary : props.theme.greyDark};
   border-radius: ${(props) => props.theme.radius};
 
   color: ${(props) => props.theme.light};
+
+  opacity: ${(props) => (props.ofCurrentMonth ? "1" : "0.5")};
 
   &:hover {
     cursor: pointer;
@@ -41,12 +49,19 @@ const EventsHolder = styled.div`
 interface Props {
   date: Date;
   events?: Array<IEvent>;
+  isToday: boolean;
+  ofCurrentMonth: boolean;
 }
 
-export const Day: React.FC<Props> = ({ date, events = [] }) => {
+export const Day: React.FC<Props> = ({
+  date,
+  events = [],
+  isToday,
+  ofCurrentMonth,
+}) => {
   return (
-    <Container>
-      <p>9</p>
+    <Container isToday={isToday} ofCurrentMonth={ofCurrentMonth}>
+      <p>{date.getDate()}</p>
       <EventsHolder>
         {events?.map((e) => (
           <Event

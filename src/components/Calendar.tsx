@@ -1,6 +1,8 @@
-import { isSameDay } from "date-fns";
+import { isSameDay, isSameMonth, isToday } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useMonth } from "../providers/MonthProvider";
+import { getAllWeeksOfMonth } from "../services/dates";
 import IEvent from "../types/IEvent";
 import { Day } from "./Day";
 
@@ -40,7 +42,7 @@ interface DaysGridProps {
 }
 
 const DaysGrid = styled(Grid)<DaysGridProps>`
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(6, 1fr);
 
   // 100 vh - elements size on top - 2*5rem padding
   height: calc(100vh - ${(props) => props.offsetTop}px - 10rem);
@@ -52,14 +54,16 @@ const DaysGrid = styled(Grid)<DaysGridProps>`
 `;
 
 interface Props {
-  activeMonth: Array<Date>;
   events: Array<IEvent>;
 }
 
-export const Calendar: React.FC<Props> = ({ activeMonth, events }) => {
+export const Calendar: React.FC<Props> = ({ events }) => {
   const daysHeaderRef = useRef<HTMLDivElement>(null);
   const headerElement: HTMLElement | null = document.getElementById("header");
-  const [offsetTop, setOffsetTop] = useState(0);
+  const [offsetTop, setOffsetTop] = useState(32);
+
+  const [calendarDays, setCalendarDays] = useState<Array<Date>>([]);
+  const { month: activeMonth } = useMonth();
 
   /**
    * Calculating offsetTop
@@ -72,7 +76,9 @@ export const Calendar: React.FC<Props> = ({ activeMonth, events }) => {
         headerElement?.offsetHeight ? +daysHeaderEl.offsetHeight : Number
       );
     }
-  }, [daysHeaderRef, headerElement]);
+
+    setCalendarDays(getAllWeeksOfMonth(activeMonth));
+  }, [daysHeaderRef, headerElement, activeMonth]);
 
   return (
     <Container>
@@ -87,7 +93,7 @@ export const Calendar: React.FC<Props> = ({ activeMonth, events }) => {
       </DaysHeader>
 
       <DaysGrid offsetTop={offsetTop}>
-        {activeMonth.map((day: Date) => {
+        {calendarDays.map((day: Date) => {
           const eventsOfTheDay: Array<IEvent> = events.reduce(function (
             result: Array<IEvent>,
             event: IEvent
@@ -99,7 +105,15 @@ export const Calendar: React.FC<Props> = ({ activeMonth, events }) => {
           },
           []);
 
-          return <Day date={day} events={eventsOfTheDay} />;
+          return (
+            <Day
+              key={day.toISOString()}
+              date={day}
+              events={eventsOfTheDay}
+              isToday={isToday(day)}
+              ofCurrentMonth={isSameMonth(day, activeMonth)}
+            />
+          );
         })}
       </DaysGrid>
     </Container>
