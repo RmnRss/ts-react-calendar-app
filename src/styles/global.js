@@ -24,6 +24,27 @@ export const GlobalStyle = createGlobalStyle`
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
   }
 
+  p, 
+  a, 
+  b {
+    font-size: 1em;
+  }
+
+  select,
+  input,
+  textarea {
+    overflow: hidden;
+    overflow-wrap: break-word;
+
+    background-color: ${(props) => props.theme.light};
+    font-weight: 400;
+    font-size: 1em;
+
+    outline: none;
+    border: none;
+    border-radius: ${(props) => props.theme.radius};
+  }
+
   @keyframes spin {
     from {
       transform: rotate(0deg);

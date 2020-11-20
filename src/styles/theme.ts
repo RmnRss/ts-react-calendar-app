@@ -12,6 +12,9 @@ const Theme: DefaultTheme = {
   dark: "#000",
   darkLight: "#282c34",
 
+  fail: "red",
+  success: "green",
+
   radius: "4px",
 };
 
