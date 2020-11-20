@@ -1,8 +1,11 @@
 import {
   addDays,
   eachDayOfInterval,
+  eachHourOfInterval,
   endOfMonth,
   endOfWeek,
+  setHours,
+  setMinutes,
   startOfMonth,
   startOfWeek,
   subDays,
@@ -56,4 +59,45 @@ export function getAllWeeksOfMonth(date: Date): Array<Date> {
   }
 
   return [...daysBefore, ...getDaysOfTheMonth(date), ...daysAfter];
+}
+
+interface HourItem {
+  key: string;
+  value: number;
+}
+
+/**
+ * Takes a day and return a dictionary of hours anf their decimal value
+ * @param day containing the hours we want
+ */
+export function getHoursOfADay(day: Date): Array<HourItem> {
+  const hoursByQuarter: Array<HourItem> = [];
+
+  const datesWithHours = eachHourOfInterval({
+    start: setHours(day, 0),
+    end: setHours(day, 23),
+  });
+
+  for (let date of datesWithHours) {
+    const hour = date.getHours();
+
+    hoursByQuarter.push({ key: `${hour}:00`, value: hour });
+    hoursByQuarter.push({ key: `${hour}:15`, value: hour + 0.25 });
+    hoursByQuarter.push({ key: `${hour}:30`, value: hour + 0.5 });
+    hoursByQuarter.push({ key: `${hour}:45`, value: hour + 0.75 });
+  }
+
+  return hoursByQuarter;
+}
+
+/**
+ * sets hours and minutes to a given date
+ * @param day containing the hours we want
+ * @param decimalHours time to set in decimals (e.g 8.5 for 8:30)
+ */
+export function setHoursAndMinutes(day: Date, decimalHours: number): Date {
+  const dateWithHours = setHours(day, decimalHours);
+  const minutes = (decimalHours - dateWithHours.getHours()) * 60;
+
+  return setMinutes(dateWithHours, minutes);
 }
