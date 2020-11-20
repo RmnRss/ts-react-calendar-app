@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface ContainerProps {
   color: string;
+  disabled: boolean;
 }
 
 const ButtonContainer = styled.button<ContainerProps>`
@@ -16,7 +17,8 @@ const ButtonContainer = styled.button<ContainerProps>`
 
   width: max-content;
 
-  background-color: ${(props) => props.theme[props.color]};
+  background-color: ${(props) =>
+    props.disabled ? props.theme.greyDark : props.theme[props.color]};
   border-radius: ${(props) => props.theme.radius};
 
   overflow: hidden;
@@ -40,6 +42,7 @@ interface Props {
   className?: string;
   children: React.ReactNode;
   color: string;
+  disabled?: boolean;
   onClick?:
     | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
     | undefined;
@@ -50,6 +53,7 @@ export const Button: React.FC<Props> = ({
   children,
   className,
   color,
+  disabled = false,
   onClick,
   type = "button",
 }) => {
@@ -57,6 +61,7 @@ export const Button: React.FC<Props> = ({
     <ButtonContainer
       className={className}
       color={color}
+      disabled={disabled}
       onClick={onClick}
       type={type}
     >
