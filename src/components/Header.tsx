@@ -10,7 +10,7 @@ import { Button } from "./Button";
 
 const Container = styled.header`
   position: fixed;
-  z-index: 999;
+  z-index: 2;
   top: 0;
   left: 0;
 

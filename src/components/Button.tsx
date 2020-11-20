@@ -43,11 +43,23 @@ interface Props {
   onClick?:
     | ((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void)
     | undefined;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
-export const Button: React.FC<Props> = ({ children, color, onClick }) => {
+export const Button: React.FC<Props> = ({
+  children,
+  className,
+  color,
+  onClick,
+  type = "button",
+}) => {
   return (
-    <ButtonContainer onClick={onClick} color={color}>
+    <ButtonContainer
+      className={className}
+      color={color}
+      onClick={onClick}
+      type={type}
+    >
       {children}
     </ButtonContainer>
   );
