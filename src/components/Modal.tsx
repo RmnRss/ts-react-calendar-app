@@ -91,7 +91,7 @@ interface Props {
 const Modal: React.FC<Props> = ({ show, handleClose, title, children }) =>
   show
     ? ReactDOM.createPortal(
-        <Overlay>
+        <Overlay data-testid={"overlay"}>
           <ModalContainer>
             <ModalHeader>
               <h4>{title}</h4>

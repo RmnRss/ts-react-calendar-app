@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
+import { format } from "date-fns";
 import React from "react";
 import App from "../App";
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test("renders the correct Date", () => {
+  const { getByText } = render(<App />);
+  getByText(format(new Date(), "MMMM yyyy"));
 });

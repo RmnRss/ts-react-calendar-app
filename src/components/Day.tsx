@@ -1,7 +1,11 @@
-import React from "react";
+import { format } from "date-fns";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useModal } from "../hooks/useModal";
 import IEvent from "../types/IEvent";
 import { Event } from "./Event";
+import { EventCreationForm } from "./EventCreationForm";
+import Modal from "./Modal";
 
 interface ContainerProps {
   isToday: boolean;
@@ -59,20 +63,41 @@ export const Day: React.FC<Props> = ({
   isToday,
   ofCurrentMonth,
 }) => {
+  const { show, toggle } = useModal();
+  const [currentEvents, setCurrentEvents] = useState(events);
+
+  const createEvent = (newEvent: IEvent) => {
+    setCurrentEvents([newEvent, ...currentEvents]);
+    alert("New Event Created !");
+    toggle();
+  };
+
   return (
-    <Container isToday={isToday} ofCurrentMonth={ofCurrentMonth}>
-      <p>{date.getDate()}</p>
-      <EventsHolder>
-        {events?.map((e) => (
-          <Event
-            key={e.id}
-            dateTimeStart={e.dateTimeStart}
-            dateTimeEnd={e.dateTimeEnd}
-            title={e.title}
-            description={e.description}
-          />
-        ))}
-      </EventsHolder>
-    </Container>
+    <>
+      <Modal title={"Add an event"} show={show} handleClose={toggle}>
+        <p>{format(date, "dd MMMM yyyy")}</p>
+        <EventCreationForm date={date} createEvent={createEvent} />
+      </Modal>
+
+      <Container
+        data-testid={`day-${date.toISOString()}`}
+        isToday={isToday}
+        ofCurrentMonth={ofCurrentMonth}
+        onClick={() => toggle()}
+      >
+        <p>{date.getDate()}</p>
+        <EventsHolder>
+          {currentEvents?.map((e) => (
+            <Event
+              key={e.id}
+              dateTimeStart={e.dateTimeStart}
+              dateTimeEnd={e.dateTimeEnd}
+              title={e.title}
+              description={e.description}
+            />
+          ))}
+        </EventsHolder>
+      </Container>
+    </>
   );
 };
