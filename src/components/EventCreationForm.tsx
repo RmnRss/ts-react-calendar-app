@@ -41,12 +41,11 @@ const EventSchema = Yup.object().shape({
     ),
   description: Yup.string()
     .min(2, "Description must contain at least 3 characters")
-    .max(280, "Description must contain less than 280 characters")
-    .required("Required"),
+    .max(280, "Description must contain less than 280 characters"),
   title: Yup.string()
     .min(2, "Title must contain at least 3 characters")
     .max(140, "Title must be shorter than 140 characters")
-    .required("Required"),
+    .required("The name of the event is required"),
 });
 
 interface Props {
@@ -78,7 +77,7 @@ export const EventCreationForm: React.FC<Props> = ({ date, createEvent }) => (
     {({ isSubmitting, isValid, isValidating }) => (
       <FormHolder>
         <label htmlFor={"title"}>Name</label>
-        <TextInput name={"title"} />
+        <TextInput name={"title"} placeholder={"Diner with friends"} />
 
         <label htmlFor={"startingHour"}>Start</label>
         <Select name="startingHour">
@@ -99,7 +98,10 @@ export const EventCreationForm: React.FC<Props> = ({ date, createEvent }) => (
         </Select>
 
         <label htmlFor={"description"}>Description</label>
-        <TextArea name="description" />
+        <TextArea
+          name="description"
+          placeholder={"Meeting with John, Lydia and Joe at FBF."}
+        />
 
         <ActionButtons>
           <SubmitButton color={"primary"} type="reset">

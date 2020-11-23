@@ -80,6 +80,7 @@ export const Day: React.FC<Props> = ({
       </Modal>
 
       <Container
+        data-testid={`day-${date.toISOString()}`}
         isToday={isToday}
         ofCurrentMonth={ofCurrentMonth}
         onClick={() => toggle()}
