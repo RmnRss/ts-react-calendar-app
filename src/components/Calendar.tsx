@@ -1,6 +1,7 @@
 import { isSameDay, isSameMonth, isToday } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { useEvents } from "../providers/EventProvider";
 import { useMonth } from "../providers/MonthProvider";
 import { getAllWeeksOfMonth } from "../services/dates";
 import IEvent from "../types/IEvent";
@@ -53,17 +54,18 @@ const DaysGrid = styled(Grid)<DaysGridProps>`
   color: ${(props) => props.theme.light};
 `;
 
-interface Props {
-  events: Array<IEvent>;
-}
+interface Props {}
 
-export const Calendar: React.FC<Props> = ({ events }) => {
+export const Calendar: React.FC<Props> = () => {
+  // Visual variables
   const daysHeaderRef = useRef<HTMLDivElement>(null);
   const headerElement: HTMLElement | null = document.getElementById("header");
   const [offsetTop, setOffsetTop] = useState(32);
 
+  // State & Providers
   const [calendarDays, setCalendarDays] = useState<Array<Date>>([]);
   const { month: activeMonth } = useMonth();
+  const { events } = useEvents();
 
   /**
    * Calculating offsetTop
