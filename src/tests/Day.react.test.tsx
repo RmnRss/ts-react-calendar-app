@@ -28,15 +28,15 @@ describe("Day", function () {
         events={[
           {
             id: 4,
-            dateTimeStart: new Date("22 January 2010, 10:00PM"),
-            dateTimeEnd: new Date("22 January 2010, 11:00PM"),
+            dateTimeStart: new Date(1995, 11, 17, 3, 30, 0),
+            dateTimeEnd: new Date(1995, 11, 17, 4, 45, 0),
             title: "Restaurant with friends",
             description: "Meeting at Papa John's Pizza",
           },
           {
             id: 5,
-            dateTimeStart: new Date("22 January 2010, 09:00AM"),
-            dateTimeEnd: new Date("22 January 2010, 11:00AM"),
+            dateTimeStart: new Date(1995, 11, 17, 6, 30, 0),
+            dateTimeEnd: new Date(1995, 11, 17, 7, 30, 0),
             title: "Breakfast with friends",
             description: "Meeting at Papa John's Pizza",
           },

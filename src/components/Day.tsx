@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useModal } from "../hooks/useModal";
 import IEvent from "../types/IEvent";
@@ -64,19 +64,12 @@ export const Day: React.FC<Props> = ({
   ofCurrentMonth,
 }) => {
   const { show, toggle } = useModal();
-  const [currentEvents, setCurrentEvents] = useState(events);
-
-  const createEvent = (newEvent: IEvent) => {
-    setCurrentEvents([newEvent, ...currentEvents]);
-    alert("New Event Created !");
-    toggle();
-  };
 
   return (
     <>
       <Modal title={"Add an event"} show={show} handleClose={toggle}>
         <p>{format(date, "dd MMMM yyyy")}</p>
-        <EventCreationForm date={date} createEvent={createEvent} />
+        <EventCreationForm date={date} onEventCreation={() => toggle()} />
       </Modal>
 
       <Container
@@ -87,9 +80,10 @@ export const Day: React.FC<Props> = ({
       >
         <p>{date.getDate()}</p>
         <EventsHolder>
-          {currentEvents?.map((e) => (
+          {events?.map((e) => (
             <Event
               key={e.id}
+              id={e.id}
               dateTimeStart={e.dateTimeStart}
               dateTimeEnd={e.dateTimeEnd}
               title={e.title}

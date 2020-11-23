@@ -7,10 +7,7 @@ afterEach(cleanup);
 describe("Event Creation Form", () => {
   it("Validation: Name Required", async () => {
     const { getByText } = render(
-      <EventCreationForm
-        date={new Date("21 February 2014")}
-        createEvent={() => {}}
-      />
+      <EventCreationForm date={new Date("21 February 2014")} />
     );
 
     const btn = getByText("Create Event");
@@ -24,10 +21,7 @@ describe("Event Creation Form", () => {
 
   it("Validation: Start date must be later than end date", async () => {
     const { getByText, getByDisplayValue } = render(
-      <EventCreationForm
-        date={new Date("21 February 2014")}
-        createEvent={() => {}}
-      />
+      <EventCreationForm date={new Date("21 February 2014")} />
     );
 
     const btn = getByText("Create Event");
@@ -63,10 +57,7 @@ describe("Event Creation Form", () => {
 
   it("Validation: Max Characters", async () => {
     const { getByText, getByPlaceholderText } = render(
-      <EventCreationForm
-        date={new Date("21 February 2014")}
-        createEvent={() => {}}
-      />
+      <EventCreationForm date={new Date("21 February 2014")} />
     );
 
     const btn = getByText("Create Event");
@@ -107,10 +98,7 @@ describe("Event Creation Form", () => {
 
   it("Reset button clears inputs", async () => {
     const { getByText, getByPlaceholderText } = render(
-      <EventCreationForm
-        date={new Date("21 February 2014")}
-        createEvent={() => {}}
-      />
+      <EventCreationForm date={new Date("21 February 2014")} />
     );
 
     const btn = getByText("Reset");

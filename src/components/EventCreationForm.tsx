@@ -2,6 +2,7 @@ import { Form, Formik } from "formik";
 import React from "react";
 import styled from "styled-components";
 import * as Yup from "yup";
+import { useEvents } from "../providers/EventProvider";
 import { getHoursOfADay, setHoursAndMinutes } from "../services/dates";
 import IEvent from "../types/IEvent";
 import { Button } from "./Button";
@@ -50,73 +51,84 @@ const EventSchema = Yup.object().shape({
 
 interface Props {
   date: Date;
-  createEvent: (event: IEvent) => void;
+  onEventCreation?: () => void;
 }
 
-export const EventCreationForm: React.FC<Props> = ({ date, createEvent }) => (
-  <Formik
-    initialValues={{
-      startingHour: 8,
-      endingHour: 9,
-      description: "",
-      title: "",
-    }}
-    validationSchema={EventSchema}
-    onSubmit={(values) => {
-      const newEvent: IEvent = {
-        id: Date.now(),
-        dateTimeStart: setHoursAndMinutes(date, values.startingHour),
-        dateTimeEnd: setHoursAndMinutes(date, values.endingHour),
-        description: values.description,
-        title: values.title,
-      };
+export const EventCreationForm: React.FC<Props> = ({
+  date,
+  onEventCreation,
+}) => {
+  const { addEvent } = useEvents();
 
-      createEvent(newEvent);
-    }}
-  >
-    {({ isSubmitting, isValid, isValidating }) => (
-      <FormHolder>
-        <label htmlFor={"title"}>Name</label>
-        <TextInput name={"title"} placeholder={"Diner with friends"} />
+  return (
+    <Formik
+      initialValues={{
+        startingHour: 8,
+        endingHour: 9,
+        description: "",
+        title: "",
+      }}
+      validationSchema={EventSchema}
+      onSubmit={(values) => {
+        const newEvent: IEvent = {
+          id: Date.now(),
+          dateTimeStart: setHoursAndMinutes(date, values.startingHour),
+          dateTimeEnd: setHoursAndMinutes(date, values.endingHour),
+          description: values.description,
+          title: values.title,
+        };
 
-        <label htmlFor={"startingHour"}>Start</label>
-        <Select name="startingHour">
-          {getHoursOfADay(date).map((item) => (
-            <option key={item.key} value={item.value}>
-              {item.key}
-            </option>
-          ))}
-        </Select>
+        addEvent(newEvent);
 
-        <label htmlFor={"endingHour"}>End</label>
-        <Select name="endingHour">
-          {getHoursOfADay(date).map((item) => (
-            <option key={item.key} value={item.value}>
-              {item.key}
-            </option>
-          ))}
-        </Select>
+        if (onEventCreation) {
+          onEventCreation();
+        }
+      }}
+    >
+      {({ isSubmitting, isValid, isValidating }) => (
+        <FormHolder>
+          <label htmlFor={"title"}>Name</label>
+          <TextInput name={"title"} placeholder={"Diner with friends"} />
 
-        <label htmlFor={"description"}>Description</label>
-        <TextArea
-          name="description"
-          placeholder={"Meeting with John, Lydia and Joe at FBF."}
-        />
+          <label htmlFor={"startingHour"}>Start</label>
+          <Select name="startingHour">
+            {getHoursOfADay(date).map((item) => (
+              <option key={item.key} value={item.value}>
+                {item.key}
+              </option>
+            ))}
+          </Select>
 
-        <ActionButtons>
-          <SubmitButton color={"primary"} type="reset">
-            Reset
-          </SubmitButton>
+          <label htmlFor={"endingHour"}>End</label>
+          <Select name="endingHour">
+            {getHoursOfADay(date).map((item) => (
+              <option key={item.key} value={item.value}>
+                {item.key}
+              </option>
+            ))}
+          </Select>
 
-          <SubmitButton
-            color={"primary"}
-            disabled={isSubmitting || isValidating || !isValid}
-            type="submit"
-          >
-            Create Event
-          </SubmitButton>
-        </ActionButtons>
-      </FormHolder>
-    )}
-  </Formik>
-);
+          <label htmlFor={"description"}>Description</label>
+          <TextArea
+            name="description"
+            placeholder={"Meeting with John, Lydia and Joe at FBF."}
+          />
+
+          <ActionButtons>
+            <SubmitButton color={"primary"} type="reset">
+              Reset
+            </SubmitButton>
+
+            <SubmitButton
+              color={"primary"}
+              disabled={isSubmitting || isValidating || !isValid}
+              type="submit"
+            >
+              Create Event
+            </SubmitButton>
+          </ActionButtons>
+        </FormHolder>
+      )}
+    </Formik>
+  );
+};

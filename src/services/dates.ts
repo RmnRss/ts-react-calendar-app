@@ -10,23 +10,6 @@ import {
   startOfWeek,
   subDays,
 } from "date-fns";
-import IEvent from "../types/IEvent";
-
-export function createFakeEvents(): Array<IEvent> {
-  const ev: Array<IEvent> = [];
-
-  for (let i: number = 0; i < 2; i++) {
-    ev.push({
-      id: i,
-      dateTimeStart: new Date(2021, 4, 19, 14, 2, 0, 0),
-      dateTimeEnd: new Date(2021, 4, 19, 15, 2, 0, 0),
-      title: "event",
-      description: "this is an event",
-    });
-  }
-
-  return ev;
-}
 
 export function getDaysOfTheMonth(date: Date): Array<Date> {
   return eachDayOfInterval({
