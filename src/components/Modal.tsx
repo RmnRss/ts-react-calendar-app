@@ -33,7 +33,9 @@ const ModalContainer = styled(Column)`
   padding: 0;
 
   border-radius: 8px;
-  background-color: ${(props) => props.theme.darkLight};
+  background-color: ${(props) => props.theme.grey};
+
+  overflow: hidden;
 
   @media screen and (max-width: 1024px) {
     width: 680px;
@@ -53,7 +55,7 @@ const ModalHeader = styled.div`
 
   padding: 1rem 2rem;
 
-  background-color: rgba(256, 256, 256, 0.05);
+  background-color: ${(props) => props.theme.darkLight};
 `;
 
 const CloseIcon = styled.img`

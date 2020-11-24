@@ -86,7 +86,7 @@ const Description = styled.p`
   padding: 1rem;
   margin: 1rem 0;
 
-  border: 1px solid ${(props) => props.theme.greyDark};
+  border: 1px solid ${(props) => props.theme.grey};
   border-radius: ${(props) => props.theme.radius};
 `;
 

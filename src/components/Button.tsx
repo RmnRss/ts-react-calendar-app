@@ -12,20 +12,20 @@ const ButtonContainer = styled.button<ContainerProps>`
   justify-content: center;
   text-align: center;
 
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   margin: 0.25rem 0.5rem;
 
   width: max-content;
 
   background-color: ${(props) =>
-    props.disabled ? props.theme.greyDark : props.theme[props.color]};
+    props.disabled ? props.theme.grey : props.theme[props.color]};
   border-radius: ${(props) => props.theme.radius};
 
   overflow: hidden;
   color: ${(props) => props.theme.light};
 
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
 
   cursor: pointer;
 
