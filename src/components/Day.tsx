@@ -1,11 +1,11 @@
 import { format } from "date-fns";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useModal } from "../hooks/useModal";
 import IEvent from "../types/IEvent";
-import { Event } from "./Event";
 import { EventCreationForm } from "./EventCreationForm";
 import Modal from "./Modal";
+import SidePanel from "./SidePanel";
 
 interface ContainerProps {
   isToday: boolean;
@@ -41,16 +41,14 @@ const Container = styled.div<ContainerProps>`
   }
 `;
 
-const EventsHolder = styled.div`
-  display: flex;
-  flex-direction: column;
+const EventsIndicator = styled.div`
+  margin: auto 0 0 0;
 
-  align-items: stretch;
-  justify-content: flex-end;
-  text-align: center;
+  height: 16px;
+  width: 16px;
 
-  height: 100%;
-  width: 100%;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.orange};
 `;
 
 interface Props {
@@ -67,6 +65,15 @@ export const Day: React.FC<Props> = ({
   ofCurrentMonth,
 }) => {
   const { show, toggle } = useModal();
+  const [showPanel, setShowPanel] = useState(false);
+
+  const togglePanelOrModal = () => {
+    if (events.length > 0) {
+      setShowPanel(true);
+    } else {
+      toggle();
+    }
+  };
 
   return (
     <>
@@ -75,25 +82,22 @@ export const Day: React.FC<Props> = ({
         <EventCreationForm date={date} onEventCreation={() => toggle()} />
       </Modal>
 
+      <SidePanel
+        visible={showPanel}
+        handleClose={() => setShowPanel(false)}
+        day={{ date, events }}
+      />
+
       <Container
         data-testid={`day-${date.toISOString()}`}
         isToday={isToday}
         ofCurrentMonth={ofCurrentMonth}
-        onClick={() => toggle()}
+        onClick={() => togglePanelOrModal()}
       >
         <p>{date.getDate()}</p>
-        <EventsHolder>
-          {events?.map((e) => (
-            <Event
-              key={e.id}
-              id={e.id}
-              dateTimeStart={e.dateTimeStart}
-              dateTimeEnd={e.dateTimeEnd}
-              title={e.title}
-              description={e.description}
-            />
-          ))}
-        </EventsHolder>
+        {events.length > 0 && (
+          <EventsIndicator data-testid={"has-event-indicator"} />
+        )}
       </Container>
     </>
   );
