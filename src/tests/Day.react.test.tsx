@@ -1,7 +1,8 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import { Day } from "../components/Day";
+import { render } from "./test-utils";
 
 describe("Day", function () {
   it("renders correctly", () => {

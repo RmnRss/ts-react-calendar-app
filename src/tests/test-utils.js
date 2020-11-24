@@ -1,14 +1,10 @@
 import { render } from "@testing-library/react";
 import React from "react";
-import { EventProvider } from "../providers/EventProvider";
-import { MonthProvider } from "../providers/MonthProvider";
+import { Provider } from "react-redux";
+import store from "../store";
 
 const AllProviders = ({ children }) => {
-  return (
-    <EventProvider>
-      <MonthProvider>{children}</MonthProvider>
-    </EventProvider>
-  );
+  return <Provider store={store}>{children}</Provider>;
 };
 
 const customRender = (ui, options) =>

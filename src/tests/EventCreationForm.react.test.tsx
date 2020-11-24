@@ -1,6 +1,7 @@
-import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, waitFor } from "@testing-library/react";
 import React from "react";
 import { EventCreationForm } from "../components/EventCreationForm";
+import { render } from "./test-utils";
 
 afterEach(cleanup);
 
