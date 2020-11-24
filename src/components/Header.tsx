@@ -112,7 +112,7 @@ export const Header: React.FC<Props> = () => {
           }}
           color={"grey"}
         >
-          <Backwards src={doubleArrow} />
+          <Backwards src={doubleArrow} alt={"previous year"} />
         </NavButton>
         <NavButton
           onClick={() => {
@@ -120,16 +120,18 @@ export const Header: React.FC<Props> = () => {
           }}
           color={"grey"}
         >
-          <Backwards src={arrow} />
+          <Backwards src={arrow} alt={"previous month"} />
         </NavButton>
-        <SelectedMonth>{format(month, "MMMM yyyy")}</SelectedMonth>
+        <SelectedMonth data-testid={"current-month"}>
+          {format(month, "MMMM yyyy")}
+        </SelectedMonth>
         <NavButton
           onClick={() => {
             nextMonth();
           }}
           color={"grey"}
         >
-          <Icon src={arrow} />
+          <Icon src={arrow} alt={"next month"} />
         </NavButton>
         <NavButton
           onClick={() => {
@@ -137,10 +139,10 @@ export const Header: React.FC<Props> = () => {
           }}
           color={"grey"}
         >
-          <Icon src={doubleArrow} />
+          <Icon src={doubleArrow} alt={"next year"} />
         </NavButton>
       </DatePicker>
-      <ProfilePicture src={bongo} />
+      <ProfilePicture src={bongo} alt={"bongo cat"} />
     </Container>
   );
 };
