@@ -3,7 +3,7 @@ import React from "react";
 import { ErrorMessage } from "../components/inputs/ErrorMessage";
 
 describe("ErrorMessage", function () {
-  test("renders correctly", () => {
+  it("renders correctly", () => {
     const { getByText } = render(<ErrorMessage>Error</ErrorMessage>);
 
     getByText("Error");

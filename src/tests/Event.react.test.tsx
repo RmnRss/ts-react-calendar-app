@@ -1,10 +1,12 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { Event } from "../components/Event";
 
-describe("Day", function () {
-  it("renders correctly", async () => {
+afterEach(cleanup);
+
+describe("Event", function () {
+  it("renders correctly", () => {
     const { getByText } = render(
       <Event
         id={4}
@@ -20,7 +22,7 @@ describe("Day", function () {
     getByText("Meeting at Papa John's Pizza");
   });
 
-  it("shows the delete button on hover", async () => {
+  it("shows the delete button on hover", () => {
     const { getByText, getByTestId } = render(
       <Event
         id={4}
