@@ -101,7 +101,7 @@ export const Calendar: React.FC<Props> = () => {
         <DayOfTheWeek>Sunday</DayOfTheWeek>
       </DaysHeader>
 
-      <DaysGrid offsetTop={offsetTop}>
+      <DaysGrid data-testid={"days-grid"} offsetTop={offsetTop}>
         {calendarDays.map((day: Date) => {
           const eventsOfTheDay: Array<IEvent> = events.reduce(function (
             result: Array<IEvent>,
