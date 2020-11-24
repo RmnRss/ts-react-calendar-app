@@ -1,11 +1,12 @@
 import { format } from "date-fns";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import bongo from "../assets/bongo.jpg";
 import arrow from "../assets/icons/arrow-next.svg";
 import doubleArrow from "../assets/icons/double-arrow-next.svg";
 import logo from "../assets/logo.svg";
-import { useMonth } from "../providers/MonthProvider";
+import { RootState } from "../reducers";
 import breakpoints from "../utils/breakpoints";
 import { Button } from "./Button";
 
@@ -94,13 +95,9 @@ const ProfilePicture = styled.img`
 interface Props {}
 
 export const Header: React.FC<Props> = () => {
-  const {
-    month,
-    nextYear,
-    nextMonth,
-    previousYear,
-    previousMonth,
-  } = useMonth();
+  const month = useSelector((state: RootState) => state.month);
+
+  const dispatch = useDispatch();
 
   return (
     <Container id={"header"}>
@@ -108,7 +105,7 @@ export const Header: React.FC<Props> = () => {
       <DatePicker>
         <NavButton
           onClick={() => {
-            previousYear();
+            dispatch({ type: "PREVIOUS_YEAR" });
           }}
           color={"grey"}
         >
@@ -116,7 +113,7 @@ export const Header: React.FC<Props> = () => {
         </NavButton>
         <NavButton
           onClick={() => {
-            previousMonth();
+            dispatch({ type: "PREVIOUS_MONTH" });
           }}
           color={"grey"}
         >
@@ -127,7 +124,7 @@ export const Header: React.FC<Props> = () => {
         </SelectedMonth>
         <NavButton
           onClick={() => {
-            nextMonth();
+            dispatch({ type: "NEXT_MONTH" });
           }}
           color={"grey"}
         >
@@ -135,7 +132,7 @@ export const Header: React.FC<Props> = () => {
         </NavButton>
         <NavButton
           onClick={() => {
-            nextYear();
+            dispatch({ type: "NEXT_YEAR" });
           }}
           color={"grey"}
         >

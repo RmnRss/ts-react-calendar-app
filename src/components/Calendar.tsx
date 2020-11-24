@@ -1,8 +1,8 @@
 import { isSameDay, isSameMonth, isToday } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { useEvents } from "../providers/EventProvider";
-import { useMonth } from "../providers/MonthProvider";
+import { RootState } from "../reducers";
 import { getAllWeeksOfMonth } from "../services/dates";
 import IEvent from "../types/IEvent";
 import breakpoints from "../utils/breakpoints";
@@ -71,8 +71,8 @@ export const Calendar: React.FC<Props> = () => {
 
   // State & Providers
   const [calendarDays, setCalendarDays] = useState<Array<Date>>([]);
-  const { month: activeMonth } = useMonth();
-  const { events } = useEvents();
+  const activeMonth = useSelector((state: RootState) => state.month);
+  const events = useSelector((state: RootState) => state.events);
 
   /**
    * Calculating offsetTop

@@ -1,8 +1,8 @@
 import { Form, Formik } from "formik";
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import * as Yup from "yup";
-import { useEvents } from "../providers/EventProvider";
 import { getHoursOfADay, setHoursAndMinutes } from "../services/dates";
 import IEvent from "../types/IEvent";
 import { Button } from "./Button";
@@ -64,7 +64,7 @@ export const EventCreationForm: React.FC<Props> = ({
   date,
   onEventCreation,
 }) => {
-  const { addEvent } = useEvents();
+  const dispatch = useDispatch();
 
   return (
     <Formik
@@ -84,7 +84,7 @@ export const EventCreationForm: React.FC<Props> = ({
           title: values.title,
         };
 
-        addEvent(newEvent);
+        dispatch({ type: "ADD_EVENT", newEvent });
 
         if (onEventCreation) {
           onEventCreation();

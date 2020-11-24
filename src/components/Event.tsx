@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { useEvents } from "../providers/EventProvider";
 import { Button } from "./Button";
 
 const EventCard = styled.div`
@@ -72,7 +72,7 @@ export const Event: React.FC<Props> = ({
   title,
   description,
 }) => {
-  const { removeEvent } = useEvents();
+  const dispatch = useDispatch();
 
   function showTime(date: Date): string {
     return format(date, "HH:mm");
@@ -91,7 +91,10 @@ export const Event: React.FC<Props> = ({
         </>
       )}
 
-      <RemoveButton color={"fail"} onClick={() => removeEvent(id)}>
+      <RemoveButton
+        color={"fail"}
+        onClick={() => dispatch({ type: "REMOVE_EVENT", eventId: id })}
+      >
         Delete
       </RemoveButton>
     </EventCard>
