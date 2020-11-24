@@ -5,10 +5,11 @@ import { useEvents } from "../providers/EventProvider";
 import { useMonth } from "../providers/MonthProvider";
 import { getAllWeeksOfMonth } from "../services/dates";
 import IEvent from "../types/IEvent";
+import breakpoints from "../utils/breakpoints";
 import { Day } from "./Day";
 
 const Container = styled.div`
-  padding: 5rem 2rem;
+  padding: 5rem 1.5rem;
 
   color: ${(props) => props.theme.light};
 `;
@@ -36,6 +37,12 @@ const DaysHeader = styled(Grid)`
 const DayOfTheWeek = styled.p`
   width: 100%;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: string(".");
+
+  @media screen and (max-width: ${breakpoints.md}px) {
+    max-width: 2ch;
+  }
 `;
 
 interface DaysGridProps {

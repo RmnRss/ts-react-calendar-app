@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import close from "../assets/icons/close.svg";
+import breakpoints from "../utils/breakpoints";
 
 const Column = styled.div`
   display: flex;
@@ -33,16 +34,19 @@ const ModalContainer = styled(Column)`
   padding: 0;
 
   border-radius: 8px;
-  background-color: ${(props) => props.theme.darkLight};
+  background-color: ${(props) => props.theme.grey};
 
-  @media screen and (max-width: 1024px) {
+  overflow: hidden;
+
+  @media screen and (max-width: ${breakpoints.lg}px) {
     width: 680px;
     min-height: 470px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     width: 100%;
     height: 100%;
+    border-radius: 0;
   }
 `;
 
@@ -53,7 +57,7 @@ const ModalHeader = styled.div`
 
   padding: 1rem 2rem;
 
-  background-color: rgba(256, 256, 256, 0.05);
+  background-color: ${(props) => props.theme.darkLight};
 `;
 
 const CloseIcon = styled.img`
@@ -73,7 +77,7 @@ const ModalContent = styled.div`
 
   overflow: auto;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     max-height: 100%;
   }
 `;

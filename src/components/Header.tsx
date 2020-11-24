@@ -6,6 +6,7 @@ import arrow from "../assets/icons/arrow-next.svg";
 import doubleArrow from "../assets/icons/double-arrow-next.svg";
 import logo from "../assets/logo.svg";
 import { useMonth } from "../providers/MonthProvider";
+import breakpoints from "../utils/breakpoints";
 import { Button } from "./Button";
 
 const Container = styled.header`
@@ -14,7 +15,7 @@ const Container = styled.header`
   top: 0;
   left: 0;
 
-  background-color: ${(props) => props.theme.dark};
+  background-color: ${(props) => props.theme.darkLight};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,14 +26,13 @@ const Container = styled.header`
 
   text-align: center;
   font-size: 1em;
-`;
 
-const Logo = styled.img`
-  height: 32px;
+  @media screen and (max-width: ${breakpoints.md}px) {
+    justify-content: center;
+  }
 `;
 
 const DatePicker = styled.div`
-  background-color: ${(props) => props.theme.dark};
   display: flex;
   align-items: center;
   justify-content: space-even;
@@ -52,11 +52,30 @@ const Backwards = styled(Icon)`
 `;
 
 const SelectedMonth = styled.p`
+  min-width: 196px;
   margin: 0 1rem;
 
   font-size: 20px;
-
   line-height: 1;
+
+  @media screen and (max-width: ${breakpoints.md}px) {
+    min-width: unset;
+    font-size: 16px;
+  }
+`;
+
+const NavButton = styled(Button)`
+  && {
+    padding: 0.25rem;
+  }
+`;
+
+const Logo = styled.img`
+  height: 32px;
+
+  @media screen and (max-width: ${breakpoints.md}px) {
+    display: none;
+  }
 `;
 
 const ProfilePicture = styled.img`
@@ -66,6 +85,10 @@ const ProfilePicture = styled.img`
   width: 32px;
 
   background-color: ${(props) => props.theme.grey};
+
+  @media screen and (max-width: ${breakpoints.md}px) {
+    display: none;
+  }
 `;
 
 interface Props {}
@@ -83,39 +106,39 @@ export const Header: React.FC<Props> = () => {
     <Container id={"header"}>
       <Logo src={logo} alt="logo" />
       <DatePicker>
-        <Button
+        <NavButton
           onClick={() => {
             previousYear();
           }}
-          color={"greyDark"}
+          color={"grey"}
         >
           <Backwards src={doubleArrow} />
-        </Button>
-        <Button
+        </NavButton>
+        <NavButton
           onClick={() => {
             previousMonth();
           }}
-          color={"darkLight"}
+          color={"grey"}
         >
           <Backwards src={arrow} />
-        </Button>
+        </NavButton>
         <SelectedMonth>{format(month, "MMMM yyyy")}</SelectedMonth>
-        <Button
+        <NavButton
           onClick={() => {
             nextMonth();
           }}
-          color={"darkLight"}
+          color={"grey"}
         >
           <Icon src={arrow} />
-        </Button>
-        <Button
+        </NavButton>
+        <NavButton
           onClick={() => {
             nextYear();
           }}
-          color={"greyDark"}
+          color={"grey"}
         >
           <Icon src={doubleArrow} />
-        </Button>
+        </NavButton>
       </DatePicker>
       <ProfilePicture src={bongo} />
     </Container>

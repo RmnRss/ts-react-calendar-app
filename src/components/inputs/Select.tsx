@@ -12,7 +12,10 @@ const Container = styled.div`
 
 const CustomSelect = styled.select`
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
+
+  background-color: ${(props) => props.theme.darkLight};
+  color: ${(props) => props.theme.light};
 `;
 
 export const Select = (props: FieldHookConfig<string>) => {

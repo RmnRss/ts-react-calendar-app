@@ -19,6 +19,12 @@ const FormHolder = styled(Form)`
   width: 100%;
 `;
 
+const HoursRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1.5rem;
+`;
+
 const ActionButtons = styled.div`
   display: flex;
   align-items: center;
@@ -90,23 +96,28 @@ export const EventCreationForm: React.FC<Props> = ({
           <label htmlFor={"title"}>Name</label>
           <TextInput name={"title"} placeholder={"Diner with friends"} />
 
-          <label htmlFor={"startingHour"}>Start</label>
-          <Select name="startingHour">
-            {getHoursOfADay(date).map((item) => (
-              <option key={item.key} value={item.value}>
-                {item.key}
-              </option>
-            ))}
-          </Select>
-
-          <label htmlFor={"endingHour"}>End</label>
-          <Select name="endingHour">
-            {getHoursOfADay(date).map((item) => (
-              <option key={item.key} value={item.value}>
-                {item.key}
-              </option>
-            ))}
-          </Select>
+          <HoursRow>
+            <div>
+              <label htmlFor={"startingHour"}>Start</label>
+              <Select name="startingHour">
+                {getHoursOfADay(date).map((item) => (
+                  <option key={item.key} value={item.value}>
+                    {item.key}
+                  </option>
+                ))}
+              </Select>
+            </div>
+            <div>
+              <label htmlFor={"endingHour"}>End</label>
+              <Select name="endingHour">
+                {getHoursOfADay(date).map((item) => (
+                  <option key={item.key} value={item.value}>
+                    {item.key}
+                  </option>
+                ))}
+              </Select>
+            </div>
+          </HoursRow>
 
           <label htmlFor={"description"}>Description</label>
           <TextArea
@@ -115,7 +126,7 @@ export const EventCreationForm: React.FC<Props> = ({
           />
 
           <ActionButtons>
-            <SubmitButton color={"primary"} type="reset">
+            <SubmitButton color={"darkLight"} type="reset">
               Reset
             </SubmitButton>
 

@@ -26,15 +26,18 @@ const Container = styled.div<ContainerProps>`
   height: 100%;
 
   background-color: ${(props) =>
-    props.isToday ? props.theme.secondary : props.theme.greyDark};
+    props.isToday ? props.theme.secondary : props.theme.grey};
   border-radius: ${(props) => props.theme.radius};
 
   color: ${(props) => props.theme.light};
 
   opacity: ${(props) => (props.ofCurrentMonth ? "1" : "0.5")};
 
+  transition: background-color 0.3s ease;
+
   &:hover {
     cursor: pointer;
+    background-color: rgba(101, 98, 252, 0.75);
   }
 `;
 
@@ -67,7 +70,7 @@ export const Day: React.FC<Props> = ({
 
   return (
     <>
-      <Modal title={"Add an event"} show={show} handleClose={toggle}>
+      <Modal title={"Create an Event"} show={show} handleClose={toggle}>
         <p>{format(date, "dd MMMM yyyy")}</p>
         <EventCreationForm date={date} onEventCreation={() => toggle()} />
       </Modal>
