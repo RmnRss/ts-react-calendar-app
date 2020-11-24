@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import close from "../assets/icons/close.svg";
 import { useEvents } from "../providers/EventProvider";
+import breakpoints from "../utils/breakpoints";
 import { Button } from "./Button";
 
 const EventCard = styled.div`
@@ -49,7 +50,7 @@ const DetailsBox = styled.div`
 
   cursor: default;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     position: fixed;
     top: 0;
     left: 0;

@@ -6,6 +6,7 @@ import arrow from "../assets/icons/arrow-next.svg";
 import doubleArrow from "../assets/icons/double-arrow-next.svg";
 import logo from "../assets/logo.svg";
 import { useMonth } from "../providers/MonthProvider";
+import breakpoints from "../utils/breakpoints";
 import { Button } from "./Button";
 
 const Container = styled.header`
@@ -26,7 +27,7 @@ const Container = styled.header`
   text-align: center;
   font-size: 1em;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     justify-content: center;
   }
 `;
@@ -57,7 +58,7 @@ const SelectedMonth = styled.p`
   font-size: 20px;
   line-height: 1;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     min-width: unset;
     font-size: 16px;
   }
@@ -72,7 +73,7 @@ const NavButton = styled(Button)`
 const Logo = styled.img`
   height: 32px;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     display: none;
   }
 `;
@@ -85,7 +86,7 @@ const ProfilePicture = styled.img`
 
   background-color: ${(props) => props.theme.grey};
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     display: none;
   }
 `;

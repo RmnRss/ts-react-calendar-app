@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import close from "../assets/icons/close.svg";
+import breakpoints from "../utils/breakpoints";
 
 const Column = styled.div`
   display: flex;
@@ -37,12 +38,12 @@ const ModalContainer = styled(Column)`
 
   overflow: hidden;
 
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: ${breakpoints.lg}px) {
     width: 680px;
     min-height: 470px;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     width: 100%;
     height: 100%;
     border-radius: 0;
@@ -76,7 +77,7 @@ const ModalContent = styled.div`
 
   overflow: auto;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: ${breakpoints.md}px) {
     max-height: 100%;
   }
 `;
