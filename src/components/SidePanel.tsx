@@ -96,7 +96,11 @@ const SidePanel: React.FC<Props> = ({ day, handleClose, visible }) => {
         <Panel data-testid={"side-panel"}>
           <PanelHeader>
             <h3>{format(day.date, "EEEE, dd MMMM yyyy")}</h3>
-            <CloseIcon src={close} onClick={() => handleClose()} />
+            <CloseIcon
+              src={close}
+              alt={"close icon"}
+              onClick={() => handleClose()}
+            />
           </PanelHeader>
 
           <PanelContent>

@@ -4,7 +4,7 @@ import React from "react";
 import { Day } from "../components/Day";
 
 describe("Day", function () {
-  it("renders correctly", async () => {
+  it("renders correctly", () => {
     const { getByText } = render(
       <Day
         date={new Date("22 January 2010")}
@@ -19,7 +19,7 @@ describe("Day", function () {
     expect(dayNumber).toBeInstanceOf(HTMLElement);
   });
 
-  it("renders correctly with events", async () => {
+  it("renders correctly with events", () => {
     const { getByTestId } = render(
       <Day
         date={new Date("22 January 2010")}
