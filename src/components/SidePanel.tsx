@@ -1,5 +1,5 @@
-import { format } from "date-fns";
-import React from "react";
+import { format, isBefore } from "date-fns";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import close from "../assets/icons/close.svg";
 import { useModal } from "../hooks/useModal";
@@ -29,7 +29,8 @@ const Panel = styled(Column)`
   width: 512px;
   max-width: 33%;
 
-  background-color: #000;
+  background-color: ${(props) => props.theme.grey};
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 
   @media screen and (max-width: ${breakpoints.md}px) {
     width: 100vw;
@@ -84,6 +85,19 @@ interface Props {
 
 const SidePanel: React.FC<Props> = ({ day, handleClose, visible }) => {
   const { show, toggle } = useModal();
+  const [events, setEvents] = useState(day.events);
+
+  useEffect(() => {
+    let tempEvents = day.events;
+    tempEvents?.sort((a, b) => {
+      if (isBefore(a.dateTimeStart, b.dateTimeStart)) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+    setEvents(tempEvents);
+  }, [day]);
 
   return (
     <>
@@ -106,8 +120,8 @@ const SidePanel: React.FC<Props> = ({ day, handleClose, visible }) => {
           <PanelContent>
             <h4>Upcoming Events</h4>
 
-            {day.events && day.events.length > 0 ? (
-              day.events?.map((e) => (
+            {events && events.length > 0 ? (
+              events?.map((e) => (
                 <Event
                   key={e.id}
                   id={e.id}
