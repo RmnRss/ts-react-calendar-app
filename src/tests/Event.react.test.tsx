@@ -15,11 +15,13 @@ describe("Day", function () {
       />
     );
 
+    getByText("03:30 - 04:45");
     getByText("Restaurant with friends");
+    getByText("Meeting at Papa John's Pizza");
   });
 
-  it("opens a details popup when clicked", async () => {
-    const { getByTestId, getByText } = render(
+  it("shows the delete button on hover", async () => {
+    const { getByText, getByTestId } = render(
       <Event
         id={4}
         dateTimeStart={new Date(1995, 11, 17, 3, 30, 0)}
@@ -29,16 +31,10 @@ describe("Day", function () {
       />
     );
 
-    const dateEl = getByTestId("event-card");
+    const card = getByTestId("event-card");
 
-    fireEvent.click(dateEl);
+    fireEvent.mouseOver(card);
 
-    await waitFor(() => {
-      getByTestId("event-details");
-      getByText("Sunday, 17 December 1995");
-      getByText("03:30");
-      getByText("04:45");
-      getByText("Meeting at Papa John's Pizza");
-    });
+    getByText("Delete");
   });
 });
