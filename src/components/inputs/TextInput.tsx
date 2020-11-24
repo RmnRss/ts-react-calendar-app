@@ -12,7 +12,10 @@ const Container = styled.div`
 
 const CustomTextField = styled.input`
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem 0.5rem;
+
+  background-color: ${(props) => props.theme.darkLight};
+  color: ${(props) => props.theme.light};
 `;
 
 export const TextInput = (props: FieldHookConfig<string>) => {

@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     color: ${(props) => props.theme.light};
-    background-color: ${(props) => props.theme.darkLight};
+    background-color: ${(props) => props.theme.dark};
 
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -41,8 +41,14 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1em;
 
     outline: none;
-    border: none;
+    border: 2px solid transparent;
     border-radius: ${(props) => props.theme.radius};
+
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: ${(props) => props.theme.primary};
+    }
   }
 
   @keyframes spin {

@@ -13,6 +13,9 @@ const Container = styled.div`
 const CustomTextArea = styled.textarea`
   width: 100%;
   padding: 0.5rem 0.75rem 2rem 0.75rem;
+
+  background-color: ${(props) => props.theme.darkLight};
+  color: ${(props) => props.theme.light};
 `;
 
 export const TextArea = (props: FieldHookConfig<string>) => {
