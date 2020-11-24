@@ -33,8 +33,11 @@ const Container = styled.div<ContainerProps>`
 
   opacity: ${(props) => (props.ofCurrentMonth ? "1" : "0.5")};
 
+  transition: background-color 0.3s ease;
+
   &:hover {
     cursor: pointer;
+    background-color: rgba(101, 98, 252, 0.75);
   }
 `;
 

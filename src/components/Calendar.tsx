@@ -8,7 +8,7 @@ import IEvent from "../types/IEvent";
 import { Day } from "./Day";
 
 const Container = styled.div`
-  padding: 5rem 2rem;
+  padding: 5rem 1.5rem;
 
   color: ${(props) => props.theme.light};
 `;
