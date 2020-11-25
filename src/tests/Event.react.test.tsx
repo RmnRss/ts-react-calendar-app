@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { cleanup, fireEvent } from "@testing-library/react";
-import { render } from "./test-utils";
 import React from "react";
 import { Event } from "../components/Event";
+import { render } from "./test-utils";
 
 afterEach(cleanup);
 

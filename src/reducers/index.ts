@@ -1,6 +1,6 @@
+import { combineReducers } from "redux";
 import eventsReducer from "./eventsReducer";
 import monthReducer from "./monthReducer";
-import { combineReducers } from "redux";
 
 /**
  * Simple file gathering reducers to keep the main index js clean

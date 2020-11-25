@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { cleanup, fireEvent, waitFor } from "@testing-library/react";
-import { render } from "./test-utils";
 import React from "react";
 import SidePanel from "../components/SidePanel";
+import { render } from "./test-utils";
 
 afterEach(cleanup);
 
